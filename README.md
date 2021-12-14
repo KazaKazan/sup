@@ -60,6 +60,5 @@ If the webpack option is passed, the script will do the following instead of cre
 
 # <b> TO-DO </b>
 
-* (If the git option is passed) Check if the repository is empty, abort if it isn't.
 * Add more checks for possible errors.
 
