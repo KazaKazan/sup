@@ -37,7 +37,9 @@ PROJECT_NAME
 
 <h2>Using Git</h2>
 
-If the git option is passed, the script will first clone a repository with the provided project name from the username added to the script insteading of creating a dir itself.
+If the git option is passed, the script will first check if a repository with the project name exists for a user. If it doesn't, it prompts to user to exit or create a repository. <b>Creating a repository requires github-cli to be installed and the user authorization to be configured.</b> 
+
+The repository with the provided project name is then cloned.
 
 Additionally, a `README.md` file will be created in the project directory.
 
@@ -59,7 +61,6 @@ If the webpack option is passed, the script will do the following instead of cre
 # <b> TO-DO </b>
 
 * Check to see if a dir with the same name as the project name exists, print a warning and exit if it does.
-* (If the git option is passed) Check to see if repository exists, if it doesn't, ask the user to create the repository.
 * (If the git option is passed) Check if the repository is empty, abort if it isn't.
 * Add more checks for possible errors.
 
