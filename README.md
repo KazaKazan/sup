@@ -39,7 +39,7 @@ PROJECT_NAME
 
 If the git option is passed, the script will first check if a repository with the project name exists for a user. If it doesn't, it prompts to user to exit or create a repository. <b>Creating a repository requires github-cli to be installed and the user authorization to be configured.</b> 
 
-The repository with the provided project name is then cloned.
+The repository with the provided project name is then cloned. At this step, the script will check if the repository is empty, and exit if it isn't.
 
 Additionally, a `README.md` file will be created in the project directory.
 
