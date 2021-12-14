@@ -35,7 +35,7 @@ PROJECT_NAME
     -script.js
 ```
 
-<h2>Using Git</h2><hr>
+<h2>Using Git</h2>
 
 If the git option is passed, the script will first clone a repository with the provided project name from the username added to the script insteading of creating a dir itself.
 
@@ -43,7 +43,7 @@ Additionally, a `README.md` file will be created in the project directory.
 
 After the set-up is complete, the script will ask the user if they would like to commit the changes, if the user agrees the scripts adds and commits all changes.
 
-<h2>Using Webpack</h2><hr>
+<h2>Using Webpack</h2>
 
 If the webpack option is passed, the script will do the following instead of creating the above mentioned file structure:
 
