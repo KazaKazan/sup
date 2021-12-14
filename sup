@@ -1,7 +1,5 @@
-# Custom bash script to create website project that optionally works with git.
-
 # Github Username
-userName=#Your username here.
+userName=#REPLACE THIS COMMENT WITH YOUR USERNAME.
 
 # Variable defaults.
 webpack=1
@@ -13,6 +11,7 @@ usage() {
     printf "Usage: sup -n <PROJECT_NAME> <OPTIONS>\n"
 }
 
+# Function to create a public repository with the project name if such a repository doesn't exist. Requires github-cli.
 createRepo() {
     answer=""
     while [ "$answer" != "y" -o "$answer" != "n" ]
@@ -29,6 +28,7 @@ createRepo() {
     done
 }
 
+# Check options
 while getopts gwn: flag
 do
     case "${flag}" in
@@ -40,16 +40,20 @@ do
     esac
 done
 
+# Print usage and abort if a project name isn't passed.
 if [ "$projectName" == "" ]; then
     usage
     exit 1
 fi
 
+# Print warning and abort if a directory with the same name as the project name exists.
 if [ -d "./$projectName" ]; then
     printf "\033[0;31mDirectory with the project name already exists!\033[0m\n"
     exit 1
 fi
 
+# Check if the repository exists if the git option is passed, abort if a connection cannot be made. If the git option isn't
+# passed, create a dir with the project name.
 if [ $git -eq 0 ]; then
     statusCode=$(curl --write-out %{http_code} --silent --output /dev/null https://github.com/$userName/$projectName)
     case $statusCode in
@@ -62,6 +66,7 @@ else
     mkdir $projectName
 fi
 
+# Main loop
 while true
 do
     cd $projectName
