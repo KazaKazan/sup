@@ -16,13 +16,14 @@ createRepo() {
     answer=""
     while [ "$answer" != "y" -o "$answer" != "n" ]
     do 
-        echo "Repository doesn't exist. Create a public repository? (Requires GitHub-cli) (y/n)"
+        echo -e "\033[1;33mRepository doesn't exist. Create a public repository?(Requires GitHub-cli)(y/n)\033[0m"
         read answer
         if [ "$answer" == "y" ]; then
             eval "gh repo create $projectName --public"
+            eval "git clone git@github.com:$userName/$projectName.git"
             break
         elif [ "$answer" == "n" ]; then
-            printf "\033[0;31mAborted\n"
+            printf "\033[0;31mAborted\033[0m\n"
             exit 1
         fi
     done
@@ -104,7 +105,7 @@ do
         answer=""
         while [ "$answer" != "y" -o "$answer" != "n" ]
         do 
-            echo "Would you like to commit? (y/n)"
+            echo -e "\033[1;33mWould you like to commit?(y/n)\033[0m"
             read answer
             if [ "$answer" == "y" ]; then
                 eval "git add ."
