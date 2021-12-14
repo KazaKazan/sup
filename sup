@@ -1,52 +1,49 @@
 # Custom bash script to create website project that optionally works with git.
 
 # Github Username
-userName=KazaKazan
+userName=#Your username here.
 
 # Variable defaults.
-npm=1
-repoName=""
-folderName=""
-dirName=""
+webpack=1
+git=1
+projectName=""
 
-while getopts g:n:N flag
+# Usage function.
+usage() {
+  printf "Usage: sup -n <PROJECT_NAME> <OPTIONS>\n"
+}
+
+while getopts gwn: flag
 do
     case "${flag}" in
-        g) repoName=${OPTARG};;
-        n) folderName=${OPTARG};;
-        N) npm=0;;
+        g) git=0;;
+        w) webpack=0;;
+        n) projectName=${OPTARG};;
+        *) usage
+           exit 1;;
     esac
 done
 
-while true
-do
-    if [ "$repoName" != "" -a "$folderName" != "" ]; then
-        echo "Options -g and -n cannot be used together."
-        break
-    fi
+if [ "$projectName" == "" ]; then
+    usage
+    exit 1
+fi
 
-    if [ "$repoName" != "" ]; then
-        eval "git clone git@github.com:$userName/$repoName.git"
-        dirName=$repoName
-        break
-    fi
-
-    if [ "$folderName" != "" ]; then
-        eval mkdir $folderName
-        dirName=$folderName
-        break
-    fi
-done
+if [ $git -eq 0 ]; then
+    eval "git clone git@github.com:$userName/$projectName.git"
+else
+    mkdir $projectName
+fi
 
 while true
 do
-    if [ "$dirName" == "" ]; then 
-        break
-    fi
+    cd $projectName
 
-    cd $dirName
+    if [ $git -eq 0 ]; then
+        touch README.md
+    fi 
 
-    if [ $npm -eq 0 ]; then
+    if [ $webpack -eq 0 ]; then
         eval "npm init"
         eval "npm install webpack webpack-cli --save-dev"
         cd node_modules
@@ -69,7 +66,25 @@ do
         touch script.js
     fi
 
-    printf "\033c"
-    echo "Setup complete."
-    break
+    if [ $git -eq 0 ]; then
+        answer=""
+        while [ "$answer" != "y" -o "$answer" != "n" ]
+        do 
+            echo "Would you like to commit? (y/n)"
+            read answer
+            if [ "$answer" == "y" ]; then
+                eval "git add ."
+                eval "git commit -m 'Initial commit.'"
+                break
+            elif [ "$answer" == "n" ]; then
+                break
+            fi
+        done
+        break
+    else
+        break
+    fi
 done
+
+printf "\033[0;32mSup setup complete.\033[0m\n"
+exit 1
