@@ -46,9 +46,11 @@ do
     if [ $webpack -eq 0 ]; then
         eval "npm init"
         eval "npm install webpack webpack-cli --save-dev"
-        cd node_modules
-        touch .gitignore
-        cd ..
+        if [ $git -eq 0]; then
+            cd node_modules
+            touch .gitignore
+            cd ..
+        fi
         mkdir src
         cd src
         touch index.js
