@@ -60,7 +60,6 @@ If the webpack option is passed, the script will do the following instead of cre
 
 # <b> TO-DO </b>
 
-* Check to see if a dir with the same name as the project name exists, print a warning and exit if it does.
 * (If the git option is passed) Check if the repository is empty, abort if it isn't.
 * Add more checks for possible errors.
 
