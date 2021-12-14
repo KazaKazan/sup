@@ -10,7 +10,22 @@ projectName=""
 
 # Usage function.
 usage() {
-  printf "Usage: sup -n <PROJECT_NAME> <OPTIONS>\n"
+    printf "Usage: sup -n <PROJECT_NAME> <OPTIONS>\n"
+}
+
+createRepo() {
+    answer=""
+    while [ "$answer" != "y" -o "$answer" != "n" ]
+    do 
+        echo "Repository does not exist. Create a public repository? (Requires GitHub-cli) (y/n)"
+        read answer
+        if [ "$answer" == "y" ]; then
+            eval "gh repo create $projectName --public"
+            break
+        elif [ "$answer" == "n" ]; then
+            exit 1
+        fi
+    done
 }
 
 while getopts gwn: flag
@@ -30,7 +45,13 @@ if [ "$projectName" == "" ]; then
 fi
 
 if [ $git -eq 0 ]; then
-    eval "git clone git@github.com:$userName/$projectName.git"
+    statusCode=$(curl --write-out %{http_code} --silent --output /dev/null https://github.com/$userName/$projectName)
+    case $statusCode in
+        404) createRepo;;
+        000) printf "Cannot connect to the remote repository."
+             exit 1;;
+        *) eval "git clone git@github.com:$userName/$projectName.git";;
+    esac
 else
     mkdir $projectName
 fi
