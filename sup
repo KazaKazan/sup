@@ -67,11 +67,22 @@ else
     mkdir $projectName
 fi
 
+
+
 # Main loop
 while true
 do
     cd $projectName
 
+    # Check to see if the git repository is empty, if it's not, abort.
+    repoFiles=$(git ls-files)
+
+    if [ "$repoFiles" != "" ]; then
+        printf "\033[0;31mRepository isn't empty!\033[0m\n"
+        exit 1
+    fi
+
+    # Start creating files.
     if [ $git -eq 0 ]; then
         touch README.md
     fi 
