@@ -12,7 +12,7 @@ Add the script to your path, and edit it to add your github user name to the rel
 
 # <b> Usage </b>
 
-Call the command inside the directory you want to create the main directory of the project. The command usage is as follows:
+Call the command inside the directory where you want the project directory to be. The command usage is as follows:
 
 ```
 sup -n <PROJECT_NAME> <OPTIONS>
@@ -25,7 +25,7 @@ And as of this version the options are as follows:
 -w      use webpack
 ```
 
-If no options are passed, the script will create directory with the following structure:
+If no options are passed, the script will create a directory with the following structure:
 
 ```
 PROJECT_NAME
@@ -37,9 +37,9 @@ PROJECT_NAME
 
 <h2>Using Git</h2>
 
-If the git option is passed, the script will first check if a repository with the project name exists for a user. If it doesn't, it prompts to user to exit or create a repository. <b>Creating a repository requires github-cli to be installed and the user authorization to be configured.</b> 
+If the git option is passed, the script will first check if a repository with the project name exists for a user. If it doesn't, it prompts to user to exit or create a new public repository. <b>Creating a new repository requires github-cli to be installed and the user authorization to be configured.</b> 
 
-The repository with the provided project name is then cloned. At this step, the script will check if the repository is empty, and exit if it isn't.
+The repository with the provided project name is then cloned. After this step, the script will check if the repository is empty, and exit if it isn't.
 
 Additionally, a `README.md` file will be created in the project directory.
 
