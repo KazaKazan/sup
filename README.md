@@ -8,7 +8,7 @@ It has multiple options that lets the user specify if the project is a git repos
 
 # <b> Installation </b>
 
-Add the script to your path, and edit it to add your github user name to the relevant variable.
+Add the script to your path, and edit it to add your github user name to the relevant variable. Remove the ".sh" extension from the file if you want to invoke the script with just `sup` instead of `sup.sh`. Make the file executable.
 
 # <b> Usage </b>
 
