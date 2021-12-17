@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Github Username
 userName=#REPLACE THIS COMMENT WITH YOUR USERNAME.
 
